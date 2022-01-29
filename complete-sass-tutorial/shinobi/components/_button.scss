@@ -1,0 +1,32 @@
+// when some property are repeating, we use mixins(to group together load of common property and values)
+@mixin btn($bg-color: #e2e2e2) {
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+	border: 0;
+	padding: $base-padding $base-padding * 2;
+	border-radius: $base-border-radius;
+	background-color: $bg-color;
+}
+
+// default value to mixin
+.btn {
+	@include btn;
+	// it will automatically take default value, if we don't use pass any{
+}
+
+@each $key, $val in $colors {
+	.btn-#{$key} {
+		@include btn($val);
+		&:hover {
+			background-color: lighten($val, 5);
+		}
+	}
+	.btn-outlined-#{$key} {
+		@include btn(#fff);
+		border: $base-border-thickness solid $val;
+		&:hover {
+			background-color: $val;
+		}
+	}
+}

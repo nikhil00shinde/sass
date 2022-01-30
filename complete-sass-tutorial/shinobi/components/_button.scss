@@ -1,4 +1,3 @@
-// when some property are repeating, we use mixins(to group together load of common property and values)
 @mixin btn($bg-color: #e2e2e2) {
 	text-decoration: none;
 	cursor: pointer;
@@ -9,10 +8,8 @@
 	background-color: $bg-color;
 }
 
-// default value to mixin
 .btn {
 	@include btn;
-	// it will automatically take default value, if we don't use pass any{
 }
 
 @each $key, $val in $colors {
@@ -27,6 +24,16 @@
 		border: $base-border-thickness solid $val;
 		&:hover {
 			background-color: $val;
+		}
+	}
+
+	// We are using function
+	.btn-complement-#{$key} {
+		@include btn($val);
+		color:light-comp($val);
+		&:hover{
+			color:$val;
+			background-color:light-comp($val);
 		}
 	}
 }
